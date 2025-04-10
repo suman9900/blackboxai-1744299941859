@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS - Interactive Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .conversation-log {
+            height: calc(100vh - 400px);
+            min-height: 300px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600">JARVIS</a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600">Home</a>
+                    <a href="assistant.html" class="text-gray-700 hover:text-blue-600">Assistant</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Assistant Interface -->
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-xl p-6">
+    <!-- API Configuration -->
+    <div class="mb-6">
+        <div id="apiConfig" class="bg-white p-4 rounded-lg shadow">
+            <h3 class="text-lg font-semibold mb-2">ChatGPT API Configuration</h3>
+            <div class="flex items-center space-x-2">
+                <input type="password" 
+                       id="apiKey" 
+                       placeholder="Enter your OpenAI API key" 
+                       class="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+                >
+                <button onclick="window.jarvis.setApiKey(document.getElementById('apiKey').value)"
+                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
+                    Save Key
+                </button>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">
+                Your API key is required for enhanced conversational abilities.
+                Get your key from <a href="https://platform.openai.com/api-keys" target="_blank" class="text-blue-600 hover:underline">OpenAI</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Status Display -->
+    <div id="status" class="text-center mb-6">
+        <p class="text-gray-600">Click the microphone to start talking</p>
+    </div>
+
+            <!-- Conversation Log -->
+            <div id="conversation-log" class="conversation-log bg-gray-50 rounded-lg p-4 mb-6 overflow-y-auto">
+                <div class="text-center text-gray-500">
+                    <i class="fas fa-comments text-4xl mb-2"></i>
+                    <p>Your conversation with JARVIS will appear here</p>
+                </div>
+            </div>
+
+            <!-- Voice Control -->
+            <div class="text-center">
+                <button id="micButton" class="bg-blue-600 text-white rounded-full p-6 hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                    <i class="fas fa-microphone text-4xl"></i>
+                </button>
+                <p id="listening-status" class="mt-4 text-sm text-gray-600">
+                    Press to start
+                </p>
+            </div>
+
+            <!-- Command Suggestions -->
+            <div class="mt-8">
+                <h3 class="text-lg font-semibold mb-4">Try saying:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-3 rounded">
+                        "What time is it?"
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded">
+                        "Tell me a joke"
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded">
+                        "Search for [anything]"
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded">
+                        "Who are you?"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
